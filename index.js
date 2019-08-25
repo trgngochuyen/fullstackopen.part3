@@ -23,12 +23,20 @@ let persons = [
     "id": 4
     }
 ]
+
+let message = (
+    '<p>Phonebook has info for '+ persons.length+ ' people</p>' + new Date()
+)
 app.get('/', (req, res) => {
     res.send('<h1>Here I am!</h1>')
 })
 
 app.get('/api/persons', (req, res) => {
     res.json(persons)
+})
+
+app.get('/info', (req, res) => {
+    res.send(message)
 })
 
 const PORT = 3001
