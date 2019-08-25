@@ -60,10 +60,19 @@ app.post('/api/persons', (req, res) => {
         const id = Math.floor(Math.random()*(max-min)+min)
         return id
     }
+    const nameList = persons.map(person => person.name)
     const body = req.body
     if (!body.name) {
         return res.status(400).json({
-            error: 'name and number missing'
+            error: 'Missing name'
+        })
+    } else if (!body.number) {
+        return res.status(400).json({
+            error: 'Missing number'
+        })
+    } else if (nameList.includes(body.name)) {
+        return res.status(400).json({
+            error: 'Name ' + body.name + ' already exists!'
         })
     }
     const person = {
