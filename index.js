@@ -1,8 +1,16 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'))
+//app.use(morgan(':method :url  :status :res[content-length] - :response-time ms'))
+
+morgan.token('person', (req, res) => {
+    return JSON.stringify(req.body)
+})
+
 
 let persons = [
     {
@@ -27,11 +35,9 @@ let persons = [
     }
 ]
 
-let message = (
-    '<p>Phonebook has info for '+ persons.length+ ' people</p>' + new Date()
-)
 app.get('/', (req, res) => {
     res.send('<h1>Here I am!</h1>')
+    console.log('Hello there')
 })
 
 app.get('/api/persons', (req, res) => {
@@ -81,11 +87,14 @@ app.post('/api/persons', (req, res) => {
         id: generateId(0,1000000),
     }
     persons = persons.concat(person)
-    console.log(person)
+    //console.log(person)
     res.json(person)
 })
 
 app.get('/info', (req, res) => {
+    let message = (
+        '<p>Phonebook has info for '+ persons.length+ ' people</p>' + new Date()
+    )
     res.send(message)
 })
 
