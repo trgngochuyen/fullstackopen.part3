@@ -1,0 +1,7 @@
+post https://fullstackpart3phonebook.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+    "name": "Too",
+    "number": "098765544"
+}
