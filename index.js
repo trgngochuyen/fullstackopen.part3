@@ -38,7 +38,7 @@ let persons = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('')
+    res.send(persons)
     console.log('Hello there')
 })
 
