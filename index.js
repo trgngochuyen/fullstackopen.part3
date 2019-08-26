@@ -7,6 +7,7 @@ const cors = require('cors')
 app.use(bodyParser.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'))
 app.use(cors())
+app.use(express.static('build'))
 
 morgan.token('person', (req, res) => {
     return JSON.stringify(req.body)
@@ -37,7 +38,7 @@ let persons = [
 ]
 
 app.get('/', (req, res) => {
-    res.send('<h1>Here I am!</h1>')
+    res.send('')
     console.log('Hello there')
 })
 
