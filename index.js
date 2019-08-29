@@ -7,10 +7,11 @@ const cors = require('cors')
 const Person = require('./models/person')
 
 app.use(bodyParser.json())
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'))
 app.use(cors())
 app.use(express.static('build'))
 
+// Logging middleware morgan
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'))
 morgan.token('person', (req, res) => {
     return JSON.stringify(req.body)
 })
@@ -26,8 +27,8 @@ const errorHandler = (error, req, res, next) => {
     next(error)
 }
 app.use(errorHandler)
-/////////////////
 
+// CRUD operations
 app.get('/api/persons', (req, res) => {
     Person.find({}).then(people => {
         res.json(people.map(person => person.toJSON()))
@@ -53,7 +54,6 @@ app.delete('/api/persons/:id', (req, res, next) => {
 })
 
 app.post('/api/persons', (req, res) => {
-    //const nameList = persons.map(person => person.name)
     const body = req.body
     if (!body.name) {
         return res.status(400).json({
@@ -63,11 +63,7 @@ app.post('/api/persons', (req, res) => {
         return res.status(400).json({
             error: 'Missing number'
         })
-    } /*else if (nameList.includes(body.name)) {
-        return res.status(400).json({
-            error: 'Name ' + body.name + ' already exists!'
-        })
-    }*/
+    }
     const person = new Person({
         name: body.name,
         number: body.number,
@@ -76,6 +72,21 @@ app.post('/api/persons', (req, res) => {
     person.save().then(savedPerson => {
         res.json(savedPerson.toJSON())
     })
+})
+
+app.put('/api/persons/:id', (req, res, next) => {
+    const body = req.body
+
+    const person = {
+        name: body.name,
+        number: body.number,
+    }
+
+    Person.findByIdAndUpdate(req.params.id, person, {new: true})
+        .then(updatedEntry => {
+            res.json(updatedEntry.toJSON())
+        })
+        .catch(error => next(error))
 })
 
 app.get('/info', (req, res) => {
