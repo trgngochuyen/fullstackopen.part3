@@ -33,9 +33,11 @@ app.use(errorHandler)
 
 // CRUD operations
 app.get('/api/persons', (req, res) => {
-    Person.find({}).then(people => {
+    Person
+        .find({})
+        .then(people => {
         res.json(people.map(person => person.toJSON()))
-    } )
+    })
 })
 
 app.get('/api/persons/:id', (req, res, next) => {
@@ -51,7 +53,8 @@ app.get('/api/persons/:id', (req, res, next) => {
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
-    Person.findByIdAndRemove(req.params.id)
+    Person
+        .findByIdAndRemove(req.params.id)
         .then(result => {
             res.status(204).end()
         })
@@ -83,7 +86,8 @@ app.put('/api/persons/:id', (req, res, next) => {
         number: body.number,
     }
 
-    Person.findByIdAndUpdate(req.params.id, person, {new: true})
+    Person
+        .findByIdAndUpdate(req.params.id, person, {new: true})
         .then(updatedEntry => {
             res.json(updatedEntry.toJSON())
         })
