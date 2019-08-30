@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.static('build'))
 
 // Logging middleware morgan
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :person'))
+app.use(morgan(':method :uri :status :res[content-length] - :response-time ms :person'))
 morgan.token('person', (req, res) => {
     return JSON.stringify(req.body)
 })
