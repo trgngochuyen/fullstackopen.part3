@@ -1,7 +1,9 @@
-Following the Full stack open course 2019 by University of Helsinki, this project comes to life. A web application called **Phonebook** is created during the course. While part 1 and 2 focus on the frontend, part 3 is mainly about building up the backend, the database, and how to connect the frontend and database to the backend, as well as to deploy the application to the Internet. The Phonebook application is now deployed at https://fullstackpart3phonebook.herokuapp.com/
+Following the Full stack open course 2019 by University of Helsinki, this **Phonebook** project comes to life. While part 1 and 2 focus on the frontend, part 3 is mainly about building up the backend, the database, and how to connect the frontend and database to the backend, as well as to deploy the application to the Internet. The Phonebook application is now deployed at https://fullstackpart3phonebook.herokuapp.com/
 
 ## Phonebook Application
-In this project, I learned how to build a backend (that works with the frontend in [part2](https://github.com/trgngochuyen/fullstackopen/tree/master/part2/phonebook)) on top of NodeJS, which is a JavaScript runtime based on Google's Chrome V8 JavaScript engine. 
+In this project, I learned how to build a backend (that works with the frontend in [part2](https://github.com/trgngochuyen/fullstackopen/tree/master/part2/phonebook)) on top of NodeJS.
+
+*This README file is a summary note of part 3.*
 
 To create a new template for the application, run `npm init` command, answer the questions presented by the utility, and then a *package.json* file will be created at the root of the project. We can make changes to the *scripts* object to make npm commands.
 
